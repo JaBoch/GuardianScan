@@ -16,8 +16,6 @@ git clone https://github.com/your-username/GuardianScan.git
 
 Navigate to the project directory:
 
-bash
-
 cd GuardianScan
 
 Install the required dependencies:
@@ -26,9 +24,9 @@ pip install -r requirements.txt
 
 Run the application:
 
-css
-
-    python main.py
+    sudo python3 GuardianScan.py
+Or:
+    sudo ./GuardianScan
 
 Usage
 
