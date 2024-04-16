@@ -53,6 +53,8 @@ class NmapGUI(QMainWindow):
         self.clear_button.setStyleSheet("QPushButton { background-color: #ff9800; color: white; border-radius: 5px; }")
         self.clear_button.clicked.connect(self.clear_fields)
 
+        self.dark_mode = False  # Add a flag to track the theme mode
+
         # Progress Bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setMaximum(100)
@@ -218,72 +220,73 @@ class NmapGUI(QMainWindow):
         self.scan_options_input.clear()
 
     def toggle_theme(self):
-        if self.styleSheet() == "":
+        if not self.dark_mode:
             self.set_dark_mode()
             self.edit_toggle_action.setText("Toggle Light Mode")
+            self.dark_mode = True
         else:
             self.set_light_mode()
             self.edit_toggle_action.setText("Toggle Dark Mode")
+            self.dark_mode = False
 
     def set_dark_mode(self):
         self.setStyleSheet("""
             QMainWindow, QLabel, QCheckBox, QTextEdit, QLineEdit, QListWidget, QProgressBar, QSplitter::handle {
-                background-color: #212121; /* Dark background for the main window */
-                color: #E0E0E0; /* Light grey text for better readability */
+                background-color: #212121;
+                color: #E0E0E0;
             }
             QPushButton {
                 background-color: #4CAF50;
-                color: #FFFFFF; /* White text on buttons */
+                color: #FFFFFF;
                 border-radius: 5px;
             }
             QPushButton:hover {
-                background-color: #45a049; /* Lighter shade for hover state */
+                background-color: #45a049;
             }
             QPushButton:pressed {
-                background-color: #388E3C; /* Even lighter for pressed state */
+                background-color: #388E3C;
             }
             QPushButton:disabled {
-                background-color: #A5D6A7; /* Light green for disabled state */
-                color: #333333; /* Dark text for disabled state */
+                background-color: #A5D6A7;
+                color: #333333;
             }
             QLineEdit, QTextEdit, QListWidget {
-                background-color: #333333; /* Darker field backgrounds to distinguish */
-                color: #FFFFFF; /* White text for input fields and text areas */
-                border: 1px solid #4CAF50; /* Greenish border for inputs */
+                background-color: #333333;
+                color: #FFFFFF;
+                border: 1px solid #4CAF50;
             }
             QMessageBox {
-                background-color: #333333; /* Dark background for message boxes */
-                color: #FFFFFF; /* White text to ensure readability in message boxes */
+                background-color: #424242;
+                color: #FFFFFF;
             }
         """)
 
     def set_light_mode(self):
-        def set_light_mode(self):
-            self.setStyleSheet("""
-                QMainWindow, QLabel, QCheckBox, QTextEdit, QLineEdit, QListWidget, QProgressBar, QSplitter::handle {
-                    background-color: #FFFFFF; /* Light background for the main window */
-                    color: #000000; /* Black text for better readability */
-                }
-                QPushButton {
-                    background-color: #F0F0F0;
-                    color: #000000; /* Black text on buttons */
-                    border-radius: 5px;
-                }
-                QPushButton:hover {
-                    background-color: #E0E0E0; /* Lighter shade for hover state */
-                }
-                QPushButton:pressed {
-                    background-color: #C0C0C0; /* Even lighter for pressed state */
-                }
-                QPushButton:disabled {
-                    background-color: #E0E0E0; /* Light grey for disabled state */
-                    color: #A0A0A0; /* Grey text for disabled state */
-                }
-                QMessageBox {
-                    background-color: #FFFFFF; /* Light background for message boxes */
-                    color: #000000; /* Black text to ensure readability in message boxes */
-                }
-            """)
+        self.setStyleSheet("""
+            QMainWindow, QLabel, QCheckBox, QTextEdit, QLineEdit, QListWidget, QProgressBar, QSplitter::handle {
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+            QPushButton {
+                background-color: #F0F0F0;
+                color: #000000;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #E0E0E0;
+            }
+            QPushButton:pressed {
+                background-color: #C0C0C0;
+            }
+            QPushButton:disabled {
+                background-color: #E0E0E0;
+                color: #A0A0A0;
+            }
+            QMessageBox {
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+        """)
     def export_scan_results(self):
         filename, _ = QFileDialog.getSaveFileName(self, "Export Scan Results", "", "CSV Files (*.csv)")
 
@@ -386,6 +389,7 @@ class NmapGUI(QMainWindow):
         commands_textedit.setPlainText(commands_text)
 
         popup_window.exec_()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
