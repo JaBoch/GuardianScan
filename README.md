@@ -8,19 +8,17 @@ Features
 
 Installation
 
-    Clone the repository:
+Clone the repository:
 
-    bash
-
-git clone https://github.com/your-username/GuardianScan.git
+    git clone https://github.com/your-username/GuardianScan.git
 
 Navigate to the project directory:
 
-cd GuardianScan
+    cd GuardianScan
 
 Install the required dependencies:
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 Run the application:
 
@@ -37,8 +35,3 @@ Usage
     Click the "Scan" button to start the scan.
     View the scan results in the output area.
     Export scan results if needed.
-
-
-Contributing
-
-Contributions are welcome!
